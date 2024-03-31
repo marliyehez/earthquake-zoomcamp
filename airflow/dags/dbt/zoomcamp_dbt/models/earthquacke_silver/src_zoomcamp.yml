@@ -1,0 +1,6 @@
+sources:
+  - name: silver
+    schema: <schema_name>
+    tables:
+      - name: gcs_external # in dbt
+        identifier: external_earthquake # in bq

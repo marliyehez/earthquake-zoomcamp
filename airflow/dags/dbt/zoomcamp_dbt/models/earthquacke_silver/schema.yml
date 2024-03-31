@@ -1,0 +1,75 @@
+
+version: 2
+
+models:
+  - name: concat_latitude_longitude
+    description: "Concatenates latitude and longitude into a single column."
+    columns:
+      - name: date
+        description: "Date of the earthquake event."
+        tests:
+          - not_null
+
+      - name: time
+        description: "Time of the earthquake event."
+        tests:
+          - not_null
+
+      - name: latitude
+        description: "Latitude coordinates of the earthquake location."
+        tests:
+          - not_null
+
+      - name: longitude
+        description: "Longitude coordinates of the earthquake location."
+        tests:
+          - not_null
+
+      - name: depth
+        description: "Depth of the earthquake event in kilometers."
+        tests:
+          - not_null
+
+      - name: magnitude
+        description: "Magnitude of the earthquake event."
+        tests:
+          - not_null
+
+  - name: add_hour_for_temp
+    description: "Adds an hour column to represent the hour of the earthquake event."
+    columns:
+      - name: hour
+        description: "Hour of the earthquake event."
+        tests:
+          - not_null
+
+            
+  - name: convert_hour_to_day_period
+    description: "Converts the hour column into a day period (e.g., Dawn, Morning, Afternoon, Evening, Night) and removes the original hour column."
+    columns:
+      - name: day_period
+        description: "Day period of the earthquake event."
+        tests:
+          - not_null
+
+
+  - name: add_earthquake_category
+    description: "Categorizes earthquakes based on magnitude into categories such as Minor, Light, Moderate, Strong, etc."
+    columns:
+      - name: earthquake_category
+        description: "Category of the earthquake based on its magnitude."
+        tests:
+          - not_null
+
+
+  - name: add_depth_category
+    description: "Categorizes earthquakes based on depth into categories such as Shallow, Intermediate, Deep, etc."
+    columns:
+      - name: depth_category
+        description: "Category of the earthquake based on its depth."
+        tests:
+          - not_null
+
+
+  - name: earthquake_partitioned
+    description: "Creates a partitioned and clustered table for earthquake data."
