@@ -180,13 +180,13 @@ terraform apply
 #### Airflow
 ```bash
 cd project_name/terraform
-nano Docker file # Service account di Dockerfile update    
+nano Dockerfile # Update service account in Dockerfile
 
 cd airflow/dags
 cp ~/.gc/<service_account_filename.json> <service_account_filename.json>
 nano earthquake_dag.py 
 ```
-Change this below:
+Change the following lines as indicated below:
 ```python
 service_account_key_file = '/tmp/<service-account-filename>'
 BUCKET_NAME = 'Your Bucket Name'
