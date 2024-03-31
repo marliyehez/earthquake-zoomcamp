@@ -170,7 +170,7 @@ terraform -version
 
 #### Terraform
 ```bash
-cd project_name/terraform
+cd earthquake-zoomcam/terraform
 nano `variables.tf` # update names
 terraform init
 terraform fmt
@@ -179,7 +179,7 @@ terraform apply
 
 #### Airflow
 ```bash
-cd project_name/terraform
+cd earthquake-zoomcam/airflow
 nano Dockerfile # Update service account in Dockerfile
 
 cd airflow/dags
