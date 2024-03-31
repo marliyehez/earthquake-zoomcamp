@@ -63,10 +63,38 @@ Airflow DAG View:
   <img src="img/earthquake-dag.png" width="600">
 <p>
 
-DBT Lineage View:
+dbt Lineage View:
 <p align="center">
   <img src="img/dbt-lineage-graph.png" width="600">
 <p>
+
+#### Clustering and Partitioning in the Data Warehouse
+```sql
+# earthquake_partitioned.sql
+{{ config(
+    materialized = 'table',
+    partition_by = {
+        'field': 'date',
+        'data_type': 'date',
+        'granularity': 'year'
+    },
+    cluster_by = [
+        'earthquake_category',
+        'depth_category',
+        'day_period'
+    ]
+)}}
+
+SELECT *
+FROM {{ ref('add_depth_category') }}
+```
+- Why Use `Year` for Partitioning?
+
+  Partitioning the table by year based on the `date` column allows for efficient data retrieval when filtering by quarter year. This choice optimizes query performance by restricting the scan to only relevant partitions, reducing the amount of data that needs to be processed.
+
+- Why Use `earthquake_category`, `depth_category`, and `day_period` for Clustering?
+
+  Clustering the table based on the `earthquake_category`, `depth_category`, and `day_period` columns is advantageous because these columns are likely to be frequently used for aggregation operations. By clustering the data based on these columns, similar values within each cluster are physically stored together on disk. This arrangement can significantly improve the performance of aggregation queries, as the related data is co-located and can be efficiently accessed without the need for extensive data shuffling. Additionally, clustering on these columns can enhance the efficiency of certain types of joins and filtering operations that involve these attributes.
 
 
 ## 📊 Dashboard
