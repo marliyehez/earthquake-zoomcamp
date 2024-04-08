@@ -98,7 +98,7 @@ FROM {{ ref('add_depth_category') }}
 
 
 ## 📊 Dashboard
-Here is the link to the [dashboard](<link>).
+Here is the link to the [dashboard](https://lookerstudio.google.com/reporting/38993308-4ed8-4351-9fb4-8379103a9db9).
 <p align="center">
   <img src="img/page1.png" width="600">
 <p>
