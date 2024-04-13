@@ -124,7 +124,8 @@ ssh -i ~/.ssh/gcp marli@<external IP>
 ```
 
 
-### Create a VM on GCP with the following recommended VM Spec modifications (leave the rest as default)
+### Create a VM on GCP 
+Create a VM on GCP with the following recommended VM Spec modifications (leave the rest as default)
 - Machine type: `e2-standard-4 (4 vCPU, 16 GB Memory)`
 - Boot Disk OS version: `Ubuntu 20.04 LTS`
 - Boot Disk size: `30 GB`
