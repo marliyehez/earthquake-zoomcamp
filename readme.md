@@ -130,43 +130,6 @@ ssh -i ~/.ssh/gcp marli@<external IP>
 - Boot Disk size: `30 GB`
 
 
-### Docker Installation [[Docker without Sudo Tutorial](https://github.com/sindresorhus/guides/blob/main/docker-without-sudo.md)]
-```bash
-sudo apt-get update
-sudo apt-get install docker.io
-
-sudo groupadd docker
-sudo gpasswd -a $USER docker # Log out, then log back in via SSH
-sudo service docker restart
-```
-
-
-### Docker Compose Installation
-Go to [this link](https://github.com/docker/compose/releases) and look for docker-compose-linux-x86_64, then copy its URL link.
-```bash
-mkdir bin
-cd bin
-wget https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-linux-x86_64 -O docker-compose    # -O specifies the output filename
-chmod +x docker-compose
-
-cd
-nano .bashrc  # add export PATH="${HOME}/bin:${PATH}" at the bottom
-source .bashrc
-```
-
-
-### Terraform Installation
-Download the Terraform package and install it with the following commands:
-
-```bash
-cd bin
-wget https://releases.hashicorp.com/terraform/1.7.5/terraform_1.7.5_linux_amd64.zip
-sudo apt-get install unzip
-unzip terraform_1.7.5_linux_amd64.zip
-rm terraform_1.7.5_linux_amd64.zip
-```
-
-
 ### Upload a Service Account File via SFTP
 ```bash
 # Create a directory for the Google Cloud service account file if it doesn't exist
@@ -182,7 +145,9 @@ cd .gc
 # put service-account.json
 ```
 
-### Final Checks
+### Docker, Docker Compose, and Terraform Installation
+Please refer to [installation.md](installation.md) for detailed steps on how to install Docker, Docker Compose, and Terraform. After installation, use the following commands to verify that everything has been installed successfully:
+
 ```bash
 gcloud --version
 docker ps
@@ -191,6 +156,8 @@ which docker-compose
 docker-compose version
 terraform -version
 ```
+
+This set of commands will check the versions and running status of the installed software, ensuring all components are correctly set up.
 
 
 ### Set up Terraform and Airflow
