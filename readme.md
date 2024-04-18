@@ -133,17 +133,20 @@ Create a VM on GCP with the following recommended VM Spec modifications (leave t
 
 ### Upload a Service Account File via SFTP
 ```bash
+# Use the SFTP command to connect to your server
+sftp username@your_server_ip_or_hostname
+
 # Create a directory for the Google Cloud service account file if it doesn't exist
-mkdir .gc
+mkdir -p .gc
 
 # Navigate to the directory
 cd .gc
 
-# Use the SFTP command to connect to your server and then use the `put` command to upload the service-account.json file
-# Example:
-# sftp username@your_server_ip_or_hostname
-# Once logged in:
-# put service-account.json
+# Upload your service account file
+put <your-service-account.json>
+
+# Rename the uploaded file
+rename <your-service-account.json> service_account.json
 ```
 
 ### Docker, Docker Compose, and Terraform Installation
@@ -165,6 +168,7 @@ This set of commands will check the versions and running status of the installed
 `git clone` this project.
 
 #### Terraform
+Terraform Setup:
 ```bash
 cd earthquake-zoomcamp/terraform
 nano `variables.tf` # update names
@@ -174,21 +178,14 @@ terraform apply
 ```
 
 #### Airflow
+1. Rename the environment file and configure variables:
 ```bash
 cd earthquake-zoomcamp/airflow
-nano Dockerfile # Update service account in Dockerfile
-
-cd airflow/dags
-cp ~/.gc/<service_account_filename.json> <service_account_filename.json>
-nano earthquake_dag.py 
-```
-Change the following lines as indicated below:
-```python
-service_account_key_file = '/tmp/<service-account-filename>'
-BUCKET_NAME = 'Your Bucket Name'
-DATASET_NAME = 'Your Dataset Name'
+mv .env.example .env
+nano .env
 ```
 
+2. Start Airflow:
 ```bash
 export AIRFLOW_UID=1000 # If Airflow warns about needing definition
 
@@ -210,12 +207,11 @@ DAGs View:
 
 
 #### dbt
-Navigate to **airflow/dags/dbt/zoomcamp_dbt/profiles.yml**.
+1. Navigate to **airflow/dags/dbt/zoomcamp_dbt/profiles.yml**. 
+    - Update your BigQuery dataset name and GCP project name.
 
-Update the keyfile to your service account JSON file path and BigQuery schema name.
-
-Navigate to **airflow/dags/dbt/zoomcamp_dbt/models/earthquacke_silver/src_zoomcamp.yml**.
-Change the BigQuery table schema name.
+2. Navigate to **airflow/dags/dbt/zoomcamp_dbt/models/earthquacke_silver/src_zoomcamp.yml**.
+    - Update your BigQuery dataset name.
 
 ❗ Use `sudo nano` or adjust permissions if there are issues with saving changes. ❗
 

@@ -14,9 +14,15 @@ from utils import read_csv_from_google_drive
 url = 'https://drive.google.com/file/d/1Cp2sG0T7r5F-iwmJfjfioPhBB2UMSe7W/view?usp=drive_url' 
 
 # For GCS and Bigquery
-BUCKET_NAME = 'Your Bucket Name'
-DATASET_NAME = 'Your Dataset Name'
+BUCKET_NAME = os.environ.get('BUCKET_NAME')
+DATASET_NAME = os.environ.get('DATASET_NAME')
 TABLE_NAME = 'external_earthquake'
+
+# For dbt
+CURRENT_DIR = os.getcwd()
+DBT_DIR = CURRENT_DIR + '/dags/dbt/zoomcamp_dbt'
+
+# Schema for GCSToBigQueryOperator
 schema_fields = [
     {"name": "date", "type": "DATE"},
     {"name": "time", "type": "TIME"},
@@ -26,9 +32,6 @@ schema_fields = [
     {"name": "magnitude", "type": "FLOAT"}
 ]
 
-# For dbt
-CURRENT_DIR = os.getcwd()
-DBT_DIR = CURRENT_DIR + '/dags/dbt/zoomcamp_dbt'
 
 
 with DAG(
@@ -43,7 +46,7 @@ with DAG(
         df = read_csv_from_google_drive(url)
 
         # Set GCS File System
-        service_account_key_file = '/tmp/<service-account-filename>'
+        service_account_key_file = '/tmp/service_account.json'
         fs = gcsfs.GCSFileSystem(token=service_account_key_file)
 
         # Write data

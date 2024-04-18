@@ -1,6 +1,6 @@
 sources:
   - name: silver
-    schema: <schema_name>
+    schema: <Your Bigquery Dataset>
     tables:
       - name: gcs_external # in dbt
         identifier: external_earthquake # in bq

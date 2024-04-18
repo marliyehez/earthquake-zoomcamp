@@ -1,6 +1,6 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "Your Service Account Filepath"
+  default     = "~/.gc/service_account.json"
 }
 
 

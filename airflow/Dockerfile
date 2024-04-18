@@ -10,6 +10,6 @@ USER airflow
 
 RUN pip install 'apache-airflow[google]'
 
-COPY <service_account_filepath> /tmp/<service_account_filename>.json
+COPY ~/.gc/service_account.json /tmp/service_account.json
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
