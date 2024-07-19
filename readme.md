@@ -188,6 +188,7 @@ nano .env
 2. Start Airflow:
 ```bash
 export AIRFLOW_UID=1000 # If Airflow warns about needing definition
+sudo chmod -R 777 <airflow_folder_path> # If Airflow has permissions to folder problem
 
 docker-compose up airflow-init
 docker-compose up -d 
