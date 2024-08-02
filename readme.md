@@ -120,7 +120,7 @@ ssh-keygen -t rsa -f ~/.ssh/gcp-capstone -C marli -b 2048
 # After that, go to Compute Engine >> Settings >> Metadata, and enter your public key there.
 
 # Connecting to the server (using a shortcut is, of course, more convenient)
-ssh -i ~/.ssh/gcp marli@<external IP>
+ssh -i ~/.ssh/gcp <username>@<external IP>
 ```
 
 
